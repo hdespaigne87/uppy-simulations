@@ -1,4 +1,4 @@
-package com.uppy.simulations.util;
+package com.uppy.simulations.utils;
 
 import org.omnifaces.util.Messages;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Named
 @ApplicationScoped
-public class Utils implements Serializable {
+public class JsfUtils implements Serializable {
 
     public static void addDetailMessage(String message) {
         addDetailMessage(message, null);

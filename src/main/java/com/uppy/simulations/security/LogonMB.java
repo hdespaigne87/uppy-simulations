@@ -1,7 +1,7 @@
 package com.uppy.simulations.security;
 
 import com.github.adminfaces.template.session.AdminSession;
-import com.uppy.simulations.util.Utils;
+import com.uppy.simulations.utils.JsfUtils;
 import org.omnifaces.util.Faces;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
@@ -13,7 +13,7 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 
-import static com.uppy.simulations.util.Utils.addDetailMessage;
+import static com.uppy.simulations.utils.JsfUtils.addDetailMessage;
 
 /**
  * This is just a login example.
@@ -39,7 +39,7 @@ public class LogonMB extends AdminSession implements Serializable {
 
     public void login() throws IOException {
         currentUser = email;
-        Utils.addDetailMessage("Logged in successfully as <b>" + email + "</b>");
+        JsfUtils.addDetailMessage("Logged in successfully as <b>" + email + "</b>");
         Faces.getExternalContext().getFlash().setKeepMessages(true);
         Faces.redirect("index.xhtml");
     }
