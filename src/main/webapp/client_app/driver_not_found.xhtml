@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="body">
+        <h1 id="algorithms-challenge">Driver Not Found</h1>
+        <ul>
+            <li><p>Simulate a notification via pusher when the customer's trip was not accepted by any driver</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:remoteCommand name="addNumberToList" actionListener="#{driverNotFoundController.addNumberToList()}" update="@form"/>
+            <p:focus context="@form"/>
+            <p:panel styleClass="box-primary card">
+                <div class="ui-fluid">
+                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="customerId" value="Introduce the customer id"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="customerId" value="#{driverNotFoundController.customerId}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="customerId"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p:separator/>
+
+                <div id="main-buttons">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:commandButton value="Send Notification to Pusher" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"
+                                         actionListener="#{driverNotFoundController.sendNotificationToPusher}"/>
+                        <p:spacer width="5"/>
+                    </div>
+                </div>
+
+                <p:spacer height="5"/>
+
+                <p:fieldset legend="Documentation">
+                    <div class="ui-fluid">
+                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                            <p:outputLabel value="Channel: " style="font-weight: bold">
+                                <p:outputLabel value="user-{CUSTOMER_ID}"/>
+                            </p:outputLabel>
+                            <br/><br/>
+                            <p:outputLabel value="Event: " style="font-weight: bold">
+                                <p:outputLabel value="driver-not-found"/>
+                            </p:outputLabel>
+                            <br/><br/>
+                            <p:outputLabel value="Payload Example: " style="font-weight: bold"/>
+                            <div>
+                                {<br/>
+                                &#160;&#160;&#160;&#160;message: "No se encontraron conductores",<br/>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </p:fieldset>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
