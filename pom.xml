@@ -7,7 +7,7 @@
     <groupId>com.uppy.simulations</groupId>
     <artifactId>uppy-simulations</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.joinfaces</groupId>
