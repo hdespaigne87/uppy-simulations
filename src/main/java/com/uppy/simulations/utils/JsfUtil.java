@@ -10,10 +10,14 @@ import java.io.Serializable;
 
 @Named
 @ApplicationScoped
-public class JsfUtils implements Serializable {
+public class JsfUtil implements Serializable {
 
     public static void addDetailMessage(String message) {
         addDetailMessage(message, null);
+    }
+
+    public static void addSuccessfulOperationMessage() {
+        addDetailMessage("Successful operation", null);
     }
 
     public static void addDetailMessage(String message, FacesMessage.Severity severity) {

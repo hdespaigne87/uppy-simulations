@@ -7,34 +7,26 @@
                 template="/WEB-INF/templates/template.xhtml">
 
     <ui:define name="body">
-        <h1 id="algorithms-challenge">Highest Repeating Word</h1>
+        <h1 id="algorithms-challenge">Trip Accepted By Driver</h1>
         <ul>
-            <li><p>Find highest repeating word from a text file.</p>
+            <li><p>Simulate a notification via pusher when the customer's trip was accepted by a driver</p>
             </li>
         </ul>
 
         <h:form id="form" prependId="false">
+            <p:remoteCommand name="addNumberToList" actionListener="#{tripAcceptedByDriverController.addNumberToList()}" update="@form"/>
             <p:focus context="@form"/>
             <p:panel styleClass="box-primary card">
                 <div class="ui-fluid">
                     <div class="ui-sm-12 ui-g-12 ui-g-nopad">
                         <div class="ui-sm-12 ui-g-12">
-                            <p:outputLabel value="Upload .txt or .log file"/>
+                            <p:outputLabel for="customerId" value="Introduce the customer id"/>
                         </div>
                         <div class="ui-sm-12 ui-g-12">
-                            <p:fileUpload id="txtFile"
-                                          allowTypes="/(\.|\/)(txt|log)$/"
-                                          fileUploadListener="#{tripAcceptedByDriverController.handleFileUpload}"
-                                          dragDropSupport="false"
-                                          required="true"
-                                          multiple="false"
-                                          sizeLimit="1024000"
-                                          update="@form"
-                                          fileLimit="1"
-                                          uploadLabel="Find highest repeating word"
-                            />
+                            <p:inputText id="customerId" value="#{tripAcceptedByDriverController .customerId}" required="true">
+                            </p:inputText>
                             <span class="help-block">
-                                <p:message for="txtFile"/>
+                                <p:message for="customerId"/>
                             </span>
                         </div>
                     </div>
@@ -42,41 +34,56 @@
 
                 <p:separator/>
 
+                <div id="main-buttons">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:commandButton value="Send Notification to Pusher" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"
+                                         actionListener="#{tripAcceptedByDriverController .sendNotificationToPusher}"/>
+                        <p:spacer width="5"/>
+                    </div>
+                </div>
+
                 <p:spacer height="5"/>
 
-                <p:fieldset legend="Result">
+                <p:fieldset legend="Documentation">
                     <div class="ui-fluid">
                         <div class="ui-sm-12 ui-g-12 ui-g-nopad">
-                            <div class="ui-sm-12 ui-g-12">
-                                <p:outputLabel value="Highest Repeating Word: " style="font-weight: bold">
-                                    <p:outputLabel value="#{tripAcceptedByDriverController.result.word}">
-                                        <f:convertNumber type="number" groupingUsed="false" />
-                                    </p:outputLabel>
-                                </p:outputLabel>
-                            </div>
-                        </div>
-                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
-                            <div class="ui-sm-12 ui-g-12">
-                                <p:outputLabel value="Times repeated: " style="font-weight: bold">
-                                    <p:outputLabel value="#{tripAcceptedByDriverController.result.timesRepeated}">
-                                        <f:convertNumber type="number" groupingUsed="false" />
-                                    </p:outputLabel>
-                                </p:outputLabel>
-                            </div>
-                        </div>
-                        <br/><br/><br/>
-                        <div class="ui-sm-12 ui-g-12 ui-g-nopad">
-                            <div class="ui-sm-12 ui-g-12">
-                                <p:outputLabel for="result" value="File content"/>
-                            </div>
-                            <div class="ui-sm-12 ui-g-12">
-                                <p:inputTextarea id="result" value="#{tripAcceptedByDriverController.fileContent}"
-                                                 rows="3"
-                                                 readonly="true" >
-                                </p:inputTextarea>
-                                <span class="help-block">
-                                    <p:message for="result"/>
-                                </span>
+                            <p:outputLabel value="Channel: " style="font-weight: bold">
+                                <p:outputLabel value="user-{CUSTOMER_ID}"/>
+                            </p:outputLabel>
+                            <br/><br/>
+                            <p:outputLabel value="Event: " style="font-weight: bold">
+                                <p:outputLabel value="driver-found"/>
+                            </p:outputLabel>
+                            <br/><br/>
+                            <p:outputLabel value="Payload Example: " style="font-weight: bold"/>
+                            <div>
+                                {<br/>
+                                &#160;&#160;&#160;&#160;"tripId":1266561773,<br/>
+                                &#160;&#160;&#160;&#160;"driver": {<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"id":1709336098,<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"firstName":"Juan",<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"lastName":"Pérez",<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"fullname":"Juan Pérez",<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"email":"juanperez@gmail.com",<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"cellphone":"+5952323223",<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"status":1478842470<br/>
+                                &#160;&#160;&#160;&#160;},<br/>
+                                &#160;&#160;&#160;&#160;"price":0.03716852579436314,<br/>
+                                &#160;&#160;&#160;&#160;"distance":"10 km",<br/>
+                                &#160;&#160;&#160;&#160;"duration":"20 min",<br/>
+                                &#160;&#160;&#160;&#160;"startDate":"2020-09-05",<br/>
+                                &#160;&#160;&#160;&#160;"origin":{<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"latitude":-25.293115,<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"longitude":-57.622006<br/>
+                                &#160;&#160;&#160;&#160;},<br/>
+                                &#160;&#160;&#160;&#160;"destination":{<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"latitude":-25.294293,<br/>
+                                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"longitude":-57.61145<br/>
+                                &#160;&#160;&#160;&#160;},<br/>
+                                &#160;&#160;&#160;&#160;"destinationAddress":"Av. General Santos c/ Eligio Ayala",<br/>
+                                &#160;&#160;&#160;&#160;"originAddress":"Feliz de Azara c/ Perú"<br/>
+                                }
                             </div>
                         </div>
                     </div>

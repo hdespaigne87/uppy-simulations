@@ -1,6 +1,7 @@
 package com.uppy.simulations.client_app.driver_not_found.controller;
 
 import com.uppy.simulations.client_app.driver_not_found.dto.DriverNotFoundDTO;
+import com.uppy.simulations.utils.JsfUtil;
 import com.uppy.simulations.utils.JsonUtil;
 import com.uppy.simulations.utils.PusherUtil;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class DriverNotFoundController implements Serializable {
 
     public void sendNotificationToPusher() {
         PusherUtil.sendMessage("user-" + customerId, "driver-not-found", JsonUtil.toJson(new DriverNotFoundDTO()));
+        JsfUtil.addSuccessfulOperationMessage();
     }
 }
