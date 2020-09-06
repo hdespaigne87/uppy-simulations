@@ -12,9 +12,10 @@ public class TripAcceptedByDriverDTO {
     private double price;
     private String distance;
     private String duration;
-    private String startDate;
+    private Long startDate;
     private CustomLatLngDTO origin;
     private CustomLatLngDTO destination;
     private String destinationAddress;
     private String originAddress;
+    private CarInfoDTO carInfo;
 }
