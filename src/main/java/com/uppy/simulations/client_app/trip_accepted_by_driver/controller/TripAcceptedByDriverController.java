@@ -1,13 +1,16 @@
 package com.uppy.simulations.client_app.trip_accepted_by_driver.controller;
 
-import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.CarInfoDTO;
-import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.CustomLatLngDTO;
-import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.TripAcceptedByDriverDTO;
-import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.UserModelDTO;
+import com.firebase.geofire.core.GeoHash;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.GeoPoint;
+import com.google.cloud.firestore.WriteResult;
+import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.*;
 import com.uppy.simulations.utils.JsfUtil;
 import com.uppy.simulations.utils.JsonUtil;
 import com.uppy.simulations.utils.PusherUtil;
+import com.uppy.simulations.utils.RandomLocationGenerator;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -20,11 +23,14 @@ import java.util.Random;
 @Data
 public class TripAcceptedByDriverController implements Serializable {
 
+    @Autowired
+    private Firestore firestore;
+
     private String customerId;
 
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
-        int driverId = random.nextInt(Integer.MAX_VALUE);
+        int driverId = 1;
         int status = random.nextInt(Integer.MAX_VALUE);
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
@@ -42,8 +48,37 @@ public class TripAcceptedByDriverController implements Serializable {
                 "Feliz de Azara c/ Perú", carInfo);
     }
 
+    private void updateDriverPositions(int driverId) {
+        double latitude = -25.2858633;
+        double longitude = -57.629655;
+        for (int i = 0; i < 10; i++) {
+            RandomLocationGenerator.Location location = RandomLocationGenerator.getRandomLocation(latitude, longitude, 1);
+            GeoPoint originGeoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+            String originGeoHash = new GeoHash(location.getLatitude(), location.getLongitude()).getGeoHashString();
+            DriverPositionDTO driverPositionDTO = new DriverPositionDTO(new FirebaseLocation(originGeoHash, originGeoPoint), false);
+            WriteResult writeResult = null;
+            try {
+                writeResult = this.firestore.document("drivers/" + driverId).set(driverPositionDTO).get();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(String.format("Driver location updated to latitude <%s> and longitude <%s> at <%s>: ", location.getLatitude(), location.getLongitude(), writeResult.getUpdateTime()));
+            try {
+                Thread.sleep(30000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public void sendNotificationToPusher() {
         PusherUtil.sendMessage("user-" + customerId, "driver-found", JsonUtil.toJson(buildDTO()));
         JsfUtil.addSuccessfulOperationMessage();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        updateDriverPositions(1);
     }
 }
