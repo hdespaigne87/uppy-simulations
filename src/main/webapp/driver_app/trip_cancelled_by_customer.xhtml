@@ -7,9 +7,9 @@
                 template="/WEB-INF/templates/template.xhtml">
 
     <ui:define name="body">
-        <h1 id="algorithms-challenge">Driver Not Found</h1>
+        <h1 id="algorithms-challenge">Trip Cancelled By Customer</h1>
         <ul>
-            <li><p>Simulate a notification via pusher when the customer's trip was not accepted by any driver</p>
+            <li><p>Simulate a notification via pusher when the customer's trip was cancelled by the customer</p>
             </li>
         </ul>
 
@@ -19,10 +19,10 @@
                 <div class="ui-fluid">
                     <div class="ui-sm-12 ui-g-12 ui-g-nopad">
                         <div class="ui-sm-12 ui-g-12">
-                            <p:outputLabel for="customerId" value="Introduce the customer id"/>
+                            <p:outputLabel for="customerId" value="Introduce the driver id"/>
                         </div>
                         <div class="ui-sm-12 ui-g-12">
-                            <p:inputText id="customerId" value="#{driverNotFoundController.customerId}" required="true">
+                            <p:inputText id="customerId" value="#{tripCancelledByCustomerController.driverId}" required="true">
                             </p:inputText>
                             <span class="help-block">
                                 <p:message for="customerId"/>
@@ -37,7 +37,7 @@
                     <div class="ui-sm-12 ui-g-12">
                         <p:commandButton value="Send Notification to Pusher" update="@form" icon="fa fa-check"
                                          styleClass="btn-primary"
-                                         actionListener="#{driverNotFoundController.sendNotificationToPusher}"/>
+                                         actionListener="#{tripCancelledByCustomerController.sendNotificationToPusher}"/>
                         <p:spacer width="5"/>
                     </div>
                 </div>
@@ -48,17 +48,17 @@
                     <div class="ui-fluid">
                         <div class="ui-sm-12 ui-g-12 ui-g-nopad">
                             <p:outputLabel value="Channel: " style="font-weight: bold">
-                                <p:outputLabel value="user-{CUSTOMER_ID}"/>
+                                <p:outputLabel value="driver-{DRIVER_ID}"/>
                             </p:outputLabel>
                             <br/><br/>
                             <p:outputLabel value="Event: " style="font-weight: bold">
-                                <p:outputLabel value="driver-not-found"/>
+                                <p:outputLabel value="trip-canceled"/>
                             </p:outputLabel>
                             <br/><br/>
                             <p:outputLabel value="Payload Example: " style="font-weight: bold"/>
                             <div>
                                 {<br/>
-                                &#160;&#160;&#160;&#160;message: "No se encontraron conductores",<br/>
+                                &#160;&#160;&#160;&#160;message: "El viaje ha sido cancelado por el cliente",<br/>
                                 }
                             </div>
                         </div>
