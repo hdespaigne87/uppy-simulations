@@ -1,7 +1,5 @@
 package com.uppy.simulations.driver_app.new_trip_received_from_client.controller;
 
-import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.FibonacciCalculationMethod;
-import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.FibonacciResult;
 import lombok.Data;
 
 import javax.faces.view.ViewScoped;
@@ -14,8 +12,7 @@ import java.io.Serializable;
 public class NewTripReceivedFromClientController implements Serializable {
 
     private Integer number;
-    private FibonacciResult result;
 
-    public void calculate(FibonacciCalculationMethod method) throws Exception {
+    public void calculate() throws Exception {
     }
 }

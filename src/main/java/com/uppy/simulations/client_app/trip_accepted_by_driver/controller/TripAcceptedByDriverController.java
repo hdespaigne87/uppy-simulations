@@ -5,10 +5,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.GeoPoint;
 import com.google.cloud.firestore.WriteResult;
 import com.uppy.simulations.client_app.trip_accepted_by_driver.dto.*;
-import com.uppy.simulations.utils.JsfUtil;
-import com.uppy.simulations.utils.JsonUtil;
-import com.uppy.simulations.utils.PusherUtil;
-import com.uppy.simulations.utils.RandomLocationGenerator;
+import com.uppy.simulations.utils.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,7 +52,7 @@ public class TripAcceptedByDriverController implements Serializable {
             RandomLocationGenerator.Location location = RandomLocationGenerator.getRandomLocation(latitude, longitude, 1);
             GeoPoint originGeoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
             String originGeoHash = new GeoHash(location.getLatitude(), location.getLongitude()).getGeoHashString();
-            DriverPositionDTO driverPositionDTO = new DriverPositionDTO(new FirebaseLocation(originGeoHash, originGeoPoint), false);
+            DriverPositionDTO driverPositionDTO = new DriverPositionDTO(new FirebaseLocationDTO(originGeoHash, originGeoPoint), false);
             WriteResult writeResult = null;
             try {
                 writeResult = this.firestore.document("drivers/" + driverId).set(driverPositionDTO).get();

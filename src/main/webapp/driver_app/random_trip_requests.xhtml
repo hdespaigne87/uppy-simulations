@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="body">
+        <h1 id="algorithms-challenge">Generate random trip requests</h1>
+        <ul>
+            <li><p>Simulate the generation of random trip requests around a center location</p>
+            </li>
+        </ul>
+
+        <h:form id="form" prependId="false">
+            <p:focus context="@form"/>
+            <p:panel styleClass="box-primary card">
+                <div class="ui-fluid">
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="latitude" value="Center Latitude"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="latitude" value="#{randomTripRequestsController.latitude}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="latitude"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="longitude" value="Center Longitude"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="longitude" value="#{randomTripRequestsController.longitude}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="longitude"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="radius" value="Radius Km"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="radius" value="#{randomTripRequestsController.radiusKm}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="radius"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="quantity" value="Quantity of trips to generate"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="quantity" value="#{randomTripRequestsController.quantityOfTrips}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="quantity"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="waitingSecondsToDeleteGeneratedTrips" value="Waiting Seconds To Delete Generated Trips"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="waitingSecondsToDeleteGeneratedTrips" value="#{randomTripRequestsController.waitingSecondsToDeleteGeneratedTrips}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="waitingSecondsToDeleteGeneratedTrips"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p:separator/>
+
+                <div id="main-buttons">
+                    <div class="ui-sm-12 ui-g-12">
+                        <p:commandButton value="Create Random Trips In Firebase" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"
+                                         actionListener="#{randomTripRequestsController.createRandomTripsInFirebase}"/>
+                        <p:spacer width="5"/>
+                    </div>
+                </div>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
