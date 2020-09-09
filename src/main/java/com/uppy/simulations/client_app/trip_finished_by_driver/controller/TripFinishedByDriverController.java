@@ -24,7 +24,7 @@ public class TripFinishedByDriverController implements Serializable {
 
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
-        int driverId = 1;
+        int driverId = 2;
         int status = random.nextInt(Integer.MAX_VALUE);
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
