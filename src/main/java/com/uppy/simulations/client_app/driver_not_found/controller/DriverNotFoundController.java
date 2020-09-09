@@ -18,7 +18,7 @@ public class DriverNotFoundController implements Serializable {
     private String customerId;
 
     public void sendNotificationToPusher() {
-        PusherUtil.sendMessage("user-" + customerId, "driver-not-found", JsonUtil.toJson(new DriverNotFoundDTO()));
+        PusherUtil.sendMessage("user-" + customerId, "driver-not-found", new DriverNotFoundDTO());
         JsfUtil.addSuccessfulOperationMessage();
     }
 }

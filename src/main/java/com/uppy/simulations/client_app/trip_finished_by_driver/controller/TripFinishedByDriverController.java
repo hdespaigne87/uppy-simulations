@@ -21,10 +21,10 @@ import java.util.Random;
 public class TripFinishedByDriverController implements Serializable {
 
     private String customerId;
+    private int driverId = 2;
 
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
-        int driverId = 2;
         int status = random.nextInt(Integer.MAX_VALUE);
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
@@ -43,7 +43,7 @@ public class TripFinishedByDriverController implements Serializable {
     }
 
     public void sendNotificationToPusher() {
-        PusherUtil.sendMessage("user-" + customerId, "trip-finished", JsonUtil.toJson(buildDTO()));
+        PusherUtil.sendMessage("user-" + customerId, "trip-finished", buildDTO());
         JsfUtil.addSuccessfulOperationMessage();
     }
 }

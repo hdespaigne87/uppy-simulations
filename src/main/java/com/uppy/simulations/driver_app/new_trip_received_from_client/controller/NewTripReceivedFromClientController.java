@@ -36,7 +36,7 @@ public class NewTripReceivedFromClientController implements Serializable {
     }
 
     public void sendNotificationToPusher() {
-        PusherUtil.sendMessage("driver-" + driverId, "new-trip-request", JsonUtil.toJson(buildDTO()));
+        PusherUtil.sendMessage("driver-" + driverId, "new-trip-request", buildDTO());
         JsfUtil.addSuccessfulOperationMessage();
     }
 }

@@ -18,7 +18,7 @@ public class TripCancelledByCustomerController implements Serializable {
     private String driverId;
 
     public void sendNotificationToPusher() {
-        PusherUtil.sendMessage("driver-" + driverId, "trip-canceled", JsonUtil.toJson(new TripCancelledByCustomerDTO()));
+        PusherUtil.sendMessage("driver-" + driverId, "trip-canceled", new TripCancelledByCustomerDTO());
         JsfUtil.addSuccessfulOperationMessage();
     }
 }

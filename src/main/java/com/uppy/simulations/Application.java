@@ -20,9 +20,9 @@ public class Application extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        PusherUtil.startClient(Arrays.asList(new PusherUtil.EventChannelConfig(
-                "user-1", Arrays.asList("driver-not-found")
-        )));
+        /*PusherUtil.startClient(Arrays.asList(new PusherUtil.EventChannelConfig(
+                "user-1", Arrays.asList("driver-not-found", "trip-finished")
+        )));*/
         SpringApplication.run(Application.class, args);
     }
 

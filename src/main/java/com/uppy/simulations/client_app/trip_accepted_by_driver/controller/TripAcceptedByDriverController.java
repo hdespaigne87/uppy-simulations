@@ -24,10 +24,10 @@ public class TripAcceptedByDriverController implements Serializable {
     private Firestore firestore;
 
     private String customerId;
+    private int driverId = 2;
 
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
-        int driverId = 2;
         int status = random.nextInt(Integer.MAX_VALUE);
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
@@ -45,7 +45,7 @@ public class TripAcceptedByDriverController implements Serializable {
                 "Feliz de Azara c/ Perú", carInfo);
     }
 
-    private void updateDriverPositions(int driverId) {
+    private void updateDriverPositions() {
         double latitude = -25.2858633;
         double longitude = -57.629655;
         for (int i = 0; i < 10; i++) {
@@ -69,13 +69,13 @@ public class TripAcceptedByDriverController implements Serializable {
     }
 
     public void sendNotificationToPusher() {
-        PusherUtil.sendMessage("user-" + customerId, "driver-found", JsonUtil.toJson(buildDTO()));
+        PusherUtil.sendMessage("user-" + customerId, "driver-found", buildDTO());
         JsfUtil.addSuccessfulOperationMessage();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        updateDriverPositions(1);
+        updateDriverPositions();
     }
 }
