@@ -19,12 +19,24 @@
             <p:focus context="@form"/>
             <p:panel styleClass="box-primary card">
                 <div class="ui-fluid">
-                    <div class="ui-sm-12 ui-g-12 ui-g-nopad">
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
                         <div class="ui-sm-12 ui-g-12">
                             <p:outputLabel for="customerId" value="Introduce the customer id"/>
                         </div>
                         <div class="ui-sm-12 ui-g-12">
                             <p:inputText id="customerId" value="#{tripAcceptedByDriverController .customerId}" required="true">
+                            </p:inputText>
+                            <span class="help-block">
+                                <p:message for="customerId"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-6 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:outputLabel for="driverId" value="Introduce the driver id"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-12">
+                            <p:inputText id="driverId" value="#{tripAcceptedByDriverController.driverId}" required="true">
                             </p:inputText>
                             <span class="help-block">
                                 <p:message for="customerId"/>
