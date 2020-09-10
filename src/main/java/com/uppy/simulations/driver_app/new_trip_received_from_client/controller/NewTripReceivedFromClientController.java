@@ -1,6 +1,5 @@
 package com.uppy.simulations.driver_app.new_trip_received_from_client.controller;
 
-import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.CarInfoDTO;
 import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.CustomLatLngDTO;
 import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.TripReceivedFromClientDTO;
 import com.uppy.simulations.driver_app.new_trip_received_from_client.dto.UserModelDTO;
@@ -27,7 +26,6 @@ public class NewTripReceivedFromClientController implements Serializable {
         CustomLatLngDTO origin = new CustomLatLngDTO(-25.293115, -57.622006);
         CustomLatLngDTO destination = new CustomLatLngDTO(-25.294293, -57.611450);
 
-        CarInfoDTO carInfo = new CarInfoDTO("Santa Fe", "Hyundai", "GHE223");
         int status = random.nextInt(Integer.MAX_VALUE);
         UserModelDTO client = new UserModelDTO(customerId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
@@ -37,7 +35,7 @@ public class NewTripReceivedFromClientController implements Serializable {
         double price = random.nextDouble();
         return new TripReceivedFromClientDTO(tripId, price, "10 km",
                 "20 min", LocalDate.now().toEpochDay(), origin, destination, "Av. General Santos c/ Eligio Ayala",
-                "Feliz de Azara c/ Perú", carInfo, client, 1, "Efectivo");
+                "Feliz de Azara c/ Perú", client, 1, "Efectivo");
     }
 
     public void sendNotificationToPusher() {

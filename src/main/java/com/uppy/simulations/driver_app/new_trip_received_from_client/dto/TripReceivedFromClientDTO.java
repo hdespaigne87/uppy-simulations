@@ -16,7 +16,6 @@ public class TripReceivedFromClientDTO {
     private CustomLatLngDTO destination;
     private String destinationAddress;
     private String originAddress;
-    private CarInfoDTO carInfo;
     private UserModelDTO client;
     private int paymentType;
     private String paymentName;
