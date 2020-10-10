@@ -19,4 +19,6 @@ public class TripReceivedFromClientDTO {
     private UserModelDTO client;
     private int paymentType;
     private String paymentName;
+    private String distanceToClient;
+    private String timeToClient;
 }
