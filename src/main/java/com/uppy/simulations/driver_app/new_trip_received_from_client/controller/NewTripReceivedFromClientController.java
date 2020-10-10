@@ -27,9 +27,10 @@ public class NewTripReceivedFromClientController implements Serializable {
         CustomLatLngDTO destination = new CustomLatLngDTO(-25.294293, -57.611450);
 
         int status = random.nextInt(Integer.MAX_VALUE);
+        String avatar = "https://es.wikipedia.org/wiki/Usuario_(inform%C3%A1tica)#/media/Archivo:User_icon_2.svg";
         UserModelDTO client = new UserModelDTO(customerId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
-                status);
+                status, avatar);
 
         int tripId = random.nextInt(Integer.MAX_VALUE);
         int price = random.nextInt();

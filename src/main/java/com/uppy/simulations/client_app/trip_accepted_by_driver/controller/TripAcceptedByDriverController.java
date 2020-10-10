@@ -29,9 +29,10 @@ public class TripAcceptedByDriverController implements Serializable {
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
         int status = random.nextInt(Integer.MAX_VALUE);
+        String avatar = "https://es.wikipedia.org/wiki/Usuario_(inform%C3%A1tica)#/media/Archivo:User_icon_2.svg";
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
-                status);
+                status,avatar);
 
         CustomLatLngDTO origin = new CustomLatLngDTO(-25.293115, -57.622006);
         CustomLatLngDTO destination = new CustomLatLngDTO(-25.294293, -57.611450);

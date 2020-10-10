@@ -14,4 +14,5 @@ public final class UserModelDTO {
     private String email;
     private String cellphone;
     private int status;
+    private String avatar;
 }
