@@ -8,7 +8,7 @@ import lombok.Getter;
 public class TripReceivedFromClientDTO {
 
     private int tripId;
-    private double price;
+    private int price;
     private String distance;
     private String duration;
     private Long startDate;

@@ -9,7 +9,7 @@ public class TripAcceptedByDriverDTO {
 
     private int tripId;
     private UserModelDTO driver;
-    private double price;
+    private int price;
     private String distance;
     private String duration;
     private Long startDate;
