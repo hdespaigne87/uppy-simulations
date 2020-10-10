@@ -32,7 +32,7 @@ public class NewTripReceivedFromClientController implements Serializable {
                 status);
 
         int tripId = random.nextInt(Integer.MAX_VALUE);
-        double price = random.nextDouble();
+        int price = random.nextInt();
         return new TripReceivedFromClientDTO(tripId, price, "10 km",
                 "20 min", LocalDate.now().toEpochDay(), origin, destination, "Av. General Santos c/ Eligio Ayala",
                 "Feliz de Azara c/ Perú", client, 1, "Efectivo");

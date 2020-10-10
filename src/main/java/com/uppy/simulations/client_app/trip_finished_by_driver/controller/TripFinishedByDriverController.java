@@ -36,7 +36,7 @@ public class TripFinishedByDriverController implements Serializable {
         CarInfoDTO carInfo = new CarInfoDTO("Santa Fe", "Hyundai", "GHE223");
 
         int tripId = random.nextInt(Integer.MAX_VALUE);
-        double price = random.nextDouble();
+        int price = random.nextInt();
         return new TripAcceptedByDriverDTO(tripId, driver, price, "10 km",
                 "20 min", LocalDate.now().toEpochDay(), origin, destination, "Av. General Santos c/ Eligio Ayala",
                 "Feliz de Azara c/ Perú", carInfo);
