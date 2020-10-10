@@ -33,11 +33,11 @@ public class NewTripReceivedFromClientController implements Serializable {
                 status, avatar);
 
         int tripId = random.nextInt(Integer.MAX_VALUE);
-        int price = random.nextInt();
+        int price = 20000;
         return new TripReceivedFromClientDTO(tripId, price, "10 km",
                 "20 min", LocalDate.now().toEpochDay(), origin, destination, "Av. General Santos c/ Eligio Ayala",
                 "Feliz de Azara c/ Perú", client, 1, "Efectivo", "1 KM", "2 min",
-                "Kia Sportage 2020");
+                "Kia Sportage 2020", "Gs 20.000");
     }
 
     public void sendNotificationToPusher() {

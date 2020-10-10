@@ -22,4 +22,5 @@ public class TripReceivedFromClientDTO {
     private String distanceToClient;
     private String timeToClient;
     private String carInUse;
+    private String priceText;
 }
