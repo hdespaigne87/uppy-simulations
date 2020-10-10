@@ -21,4 +21,5 @@ public class TripReceivedFromClientDTO {
     private String paymentName;
     private String distanceToClient;
     private String timeToClient;
+    private String carInUse;
 }
