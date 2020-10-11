@@ -26,7 +26,7 @@ public class TripFinishedByDriverController implements Serializable {
     private TripAcceptedByDriverDTO buildDTO() {
         Random random = new Random();
         int status = random.nextInt(Integer.MAX_VALUE);
-        String avatar = "https://es.wikipedia.org/wiki/Usuario_(inform%C3%A1tica)#/media/Archivo:User_icon_2.svg";
+        String avatar = "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
         UserModelDTO driver = new UserModelDTO(driverId, "Juan", "Pérez",
                 "Juan Pérez", "juanperez@gmail.com", "+5952323223",
                 status, avatar);
